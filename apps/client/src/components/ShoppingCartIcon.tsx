@@ -3,11 +3,24 @@
 import useCartStore from '@/stores/cartStore';
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const ShoppingCartIcon = () => {
-  const { cart, hasHydrated } = useCartStore();
+  const { cart } = useCartStore();
+  const [isClient, setIsClient] = useState(false);
 
-  if (!hasHydrated) return null;
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <Link href={'/cart'} className="relative">
+        <ShoppingCart className="w-4 h-4 text-gray-600" />
+      </Link>
+    );
+  }
+
   return (
     <Link href="/cart" className="relative">
       <ShoppingCart className="w-4 h-4 text-gray-600" />
