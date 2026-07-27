@@ -49,16 +49,24 @@ const ProductInteraction = ({
     <div className="flex flex-col gap-4 mt-4">
       {/* SIZE */}
       <div className="flex flex-col gap-2 text-sm">
-        <span className="text-gray-500">Size</span>
+        <span className="text-gray-500 dark:text-gray-400">Size</span>
         <div className="flex items-center gap-2">
           {product.sizes.map(size => (
             <div
-              className={`cursor-pointer border-1 p-[2px] ${selectedSize === size ? 'border-gray-600' : 'border-gray-300'}`}
+              className={`cursor-pointer border-1 p-[2px] ${
+                selectedSize === size
+                  ? 'border-gray-800 dark:border-gray-200'
+                  : 'border-gray-300 dark:border-gray-700'
+              }`}
               key={size}
               onClick={() => handleTypeChange('size', size)}
             >
               <div
-                className={`w-6 h-6 text-center flex items-center justify-center ${selectedSize === size ? 'bg-black text-white' : 'bg-white text-black'}`}
+                className={`w-6 h-6 text-center flex items-center justify-center ${
+                  selectedSize === size
+                    ? 'bg-black text-white dark:bg-white dark:text-black'
+                    : 'bg-white text-black dark:bg-gray-800 dark:text-white'
+                }`}
               >
                 {size.toUpperCase()}
               </div>
@@ -68,11 +76,15 @@ const ProductInteraction = ({
       </div>
       {/* COLOR */}
       <div className="flex flex-col gap-2 text-sm">
-        <span className="text-gray-500">Color</span>
+        <span className="text-gray-500 dark:text-gray-400">Color</span>
         <div className="flex items-center gap-2">
           {product.colors.map(color => (
             <div
-              className={`cursor-pointer border-1 p-[2px] ${selectedColor === color ? 'border-gray-300' : 'border-white'}`}
+              className={`cursor-pointer border-1 p-[2px] ${
+                selectedColor === color
+                  ? 'border-gray-600 dark:border-gray-200'
+                  : 'border-transparent'
+              }`}
               key={color}
               onClick={() => handleTypeChange('color', color)}
             >
@@ -83,17 +95,17 @@ const ProductInteraction = ({
       </div>
       {/* QUANTITY */}
       <div className="flex flex-col gap-2 text-sm">
-        <span className="text-gray-500">Quantity</span>
+        <span className="text-gray-500 dark:text-gray-400">Quantity</span>
         <div className="flex items-center gap-2">
           <button
-            className="cursor-pointer border-1 border-gray-300 p-1"
+            className="cursor-pointer border-1 border-gray-300 dark:border-gray-700 p-1 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => handleQuantityChange('decrement')}
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span>{quantity}</span>
+          <span className="text-gray-900 dark:text-gray-100">{quantity}</span>
           <button
-            className="cursor-pointer border-1 border-gray-300 p-1"
+            className="cursor-pointer border-1 border-gray-300 dark:border-gray-700 p-1 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => handleQuantityChange('increment')}
           >
             <Plus className="w-4 h-4" />
@@ -103,12 +115,12 @@ const ProductInteraction = ({
       {/* BUTTONS */}
       <button
         onClick={handleAddToCart}
-        className="bg-gray-800 text-white px-4 py-2 rounded-md shadow-lg flex items-center justify-center gap-2 cursor-pointer text-sm font-medium"
+        className="bg-gray-800 hover:bg-gray-900 dark:bg-gray-100 dark:hover:bg-white text-white dark:text-gray-900 px-4 py-2 rounded-md shadow-lg flex items-center justify-center gap-2 cursor-pointer text-sm font-medium transition-colors"
       >
         <Plus className="w-4 h-4" />
         Add to Cart
       </button>
-      <button className="ring-1 ring-gray-400 shadow-lg text-gray-800 px-4 py-2 rounded-md flex items-center justify-center cursor-pointer gap-2 text-sm font-medium">
+      <button className="ring-1 ring-gray-400 dark:ring-gray-600 shadow-lg text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 rounded-md flex items-center justify-center cursor-pointer gap-2 text-sm font-medium transition-colors">
         <ShoppingCart className="w-4 h-4" />
         Buy this Item
       </button>

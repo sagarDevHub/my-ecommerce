@@ -1,4 +1,5 @@
 'use client';
+
 import { Footprints, Glasses, Briefcase, Shirt, ShoppingBasket, Hand, Venus } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -59,11 +60,13 @@ const Categories = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 p-2 rounded-lg mb-4 text-sm">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 dark:bg-gray-900 p-2 rounded-lg mb-4 text-sm transition-colors">
       {categories.map(category => (
         <div
-          className={`flex items-center justify-center gap-2 cursor-pointer px-2 py-1 rounded-md ${
-            category.slug === selectedCategory ? 'bg-white' : 'text-gray-500'
+          className={`flex items-center justify-center gap-2 cursor-pointer px-2 py-1 rounded-md transition-all ${
+            category.slug === selectedCategory
+              ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
           }`}
           key={category.name}
           onClick={() => handleChange(category.slug)}

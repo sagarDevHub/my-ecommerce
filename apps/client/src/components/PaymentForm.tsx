@@ -22,11 +22,14 @@ const PaymentForm = () => {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(handlePaymentForm)}>
       <div className="flex flex-col gap-1">
-        <label htmlFor="cardHolder" className="text-xs text-gray-500 font-medium">
+        <label
+          htmlFor="cardHolder"
+          className="text-xs text-gray-500 dark:text-gray-400 font-medium"
+        >
           Name on Card
         </label>
         <input
-          className="border-b border-gray-200 py-2 outline-none text-sm"
+          className="border-b border-gray-200 dark:border-gray-700 bg-transparent py-2 outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
           type="text"
           id="cardHolder"
           placeholder="John Doe"
@@ -35,11 +38,14 @@ const PaymentForm = () => {
         {errors.cardHolder && <p className="text-xs text-red-500">{errors.cardHolder.message}</p>}
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="cardNumber" className="text-xs text-gray-500 font-medium">
+        <label
+          htmlFor="cardNumber"
+          className="text-xs text-gray-500 dark:text-gray-400 font-medium"
+        >
           Card Number
         </label>
         <input
-          className="border-b border-gray-200 py-2 outline-none text-sm"
+          className="border-b border-gray-200 dark:border-gray-700 bg-transparent py-2 outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
           type="text"
           id="cardNumber"
           placeholder="123456789123"
@@ -48,11 +54,14 @@ const PaymentForm = () => {
         {errors.cardNumber && <p className="text-xs text-red-500">{errors.cardNumber.message}</p>}
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="expirationDate" className="text-xs text-gray-500 font-medium">
+        <label
+          htmlFor="expirationDate"
+          className="text-xs text-gray-500 dark:text-gray-400 font-medium"
+        >
           Expiration Date
         </label>
         <input
-          className="border-b border-gray-200 py-2 outline-none text-sm"
+          className="border-b border-gray-200 dark:border-gray-700 bg-transparent py-2 outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
           type="text"
           id="expirationDate"
           placeholder="01/32"
@@ -63,11 +72,11 @@ const PaymentForm = () => {
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="cvv" className="text-xs text-gray-500 font-medium">
+        <label htmlFor="cvv" className="text-xs text-gray-500 dark:text-gray-400 font-medium">
           CVV
         </label>
         <input
-          className="border-b border-gray-200 py-2 outline-none text-sm"
+          className="border-b border-gray-200 dark:border-gray-700 bg-transparent py-2 outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
           type="text"
           id="cvv"
           placeholder="123"
@@ -82,7 +91,7 @@ const PaymentForm = () => {
       </div>
       <button
         type="submit"
-        className="w-full bg-gray-800 hover:bg-gray-900 transition-all duration-300 text-white p-2 rounded-lg cursor-pointer flex items-center justify-center gap-2"
+        className="w-full bg-gray-800 hover:bg-gray-900 dark:bg-gray-100 dark:hover:bg-white dark:text-gray-900 transition-all duration-300 text-white p-2 rounded-lg cursor-pointer flex items-center justify-center gap-2 font-medium"
       >
         Checkout
         <ShoppingCartIcon className="w-3 h-3" />
