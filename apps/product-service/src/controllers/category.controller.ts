@@ -1,0 +1,13 @@
+import { Request, Response } from 'express';
+import { Prisma } from '../../../../packages/product-db/src';
+import { prisma } from '../../../../packages/product-db/src/client';
+
+export const createCategory = async (req: Request, res: Response) => {
+  const data: Prisma.CategoryCreateInput = req.body;
+
+  const category = await prisma.category.create({ data });
+  res.status(201).json(category);
+};
+export const updateCategory = async (req: Request, res: Response) => {};
+export const deleteCategory = async (req: Request, res: Response) => {};
+export const getCategories = async (req: Request, res: Response) => {};
