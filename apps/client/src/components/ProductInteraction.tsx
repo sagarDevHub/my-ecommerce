@@ -53,7 +53,7 @@ const ProductInteraction = ({
         <div className="flex items-center gap-2">
           {product.sizes.map(size => (
             <div
-              className={`cursor-pointer border-1 p-[2px] ${
+              className={`cursor-pointer border p-0.5 ${
                 selectedSize === size
                   ? 'border-gray-800 dark:border-gray-200'
                   : 'border-gray-300 dark:border-gray-700'
@@ -80,7 +80,7 @@ const ProductInteraction = ({
         <div className="flex items-center gap-2">
           {product.colors.map(color => (
             <div
-              className={`cursor-pointer border-1 p-[2px] ${
+              className={`cursor-pointer border p-0.5 ${
                 selectedColor === color
                   ? 'border-gray-600 dark:border-gray-200'
                   : 'border-transparent'
@@ -98,14 +98,14 @@ const ProductInteraction = ({
         <span className="text-gray-500 dark:text-gray-400">Quantity</span>
         <div className="flex items-center gap-2">
           <button
-            className="cursor-pointer border-1 border-gray-300 dark:border-gray-700 p-1 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="cursor-pointer border border-gray-300 dark:border-gray-700 p-1 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => handleQuantityChange('decrement')}
           >
             <Minus className="w-4 h-4" />
           </button>
           <span className="text-gray-900 dark:text-gray-100">{quantity}</span>
           <button
-            className="cursor-pointer border-1 border-gray-300 dark:border-gray-700 p-1 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="cursor-pointer border border-gray-300 dark:border-gray-700 p-1 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => handleQuantityChange('increment')}
           >
             <Plus className="w-4 h-4" />

@@ -1,8 +1,9 @@
 import { clerkPlugin } from '@clerk/fastify';
 import Fastify from 'fastify';
 import { shouldBeUser } from './middleware/authMiddleware.js';
+import { orderRoute } from './routes/order.route.js';
 
-const fastify = Fastify();
+const fastify = Fastify({ logger: true });
 
 const start = async () => {
   try {
@@ -19,6 +20,9 @@ const start = async () => {
     fastify.get('/test', { preHandler: shouldBeUser }, (request, reply) => {
       return reply.send({ message: `Order service is authenticated`, userId: request.userId });
     });
+
+    await fastify.register(orderRoute);
+
     await fastify.listen({ port: 8001 });
     console.log(`Order service is running on (PORT: 8001)`);
   } catch (error) {
