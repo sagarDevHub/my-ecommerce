@@ -51,8 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Order: 'Order',
-  UserAddress: 'UserAddress'
+  PaymentTransaction: 'PaymentTransaction',
+  WebhookLog: 'WebhookLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -71,33 +71,32 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const OrderScalarFieldEnum = {
+export const PaymentTransactionScalarFieldEnum = {
   id: 'id',
+  orderId: 'orderId',
   userId: 'userId',
-  email: 'email',
   amount: 'amount',
+  currency: 'currency',
   status: 'status',
-  products: 'products',
+  razorpayOrderId: 'razorpayOrderId',
+  razorpayPaymentID: 'razorpayPaymentID',
+  razorpaySignature: 'razorpaySignature',
+  failureReason: 'failureReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+export type PaymentTransactionScalarFieldEnum = (typeof PaymentTransactionScalarFieldEnum)[keyof typeof PaymentTransactionScalarFieldEnum]
 
 
-export const UserAddressScalarFieldEnum = {
+export const WebhookLogScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  address: 'address',
-  city: 'city',
-  isDefault: 'isDefault',
-  createdAt: 'createdAt'
+  eventId: 'eventId',
+  payload: 'payload',
+  processedAt: 'processedAt'
 } as const
 
-export type UserAddressScalarFieldEnum = (typeof UserAddressScalarFieldEnum)[keyof typeof UserAddressScalarFieldEnum]
+export type WebhookLogScalarFieldEnum = (typeof WebhookLogScalarFieldEnum)[keyof typeof WebhookLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -121,6 +120,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const JsonNullValueFilter = {

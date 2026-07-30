@@ -1,9 +1,17 @@
+import cors from '@fastify/cors';
 import { clerkPlugin } from '@clerk/fastify';
 import Fastify from 'fastify';
 import { shouldBeUser } from './middleware/authMiddleware.js';
 import { orderRoute } from './routes/order.route.js';
 
 const fastify = Fastify({ logger: true });
+
+await fastify.register(cors, {
+  origin: ['http://localhost:3002', 'http://127.0.0.1:3002'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-dev-user-id'],
+  credentials: true,
+});
 
 const start = async () => {
   try {

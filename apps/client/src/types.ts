@@ -34,24 +34,6 @@ export const shippingFormSchema = z.object({
 
 export type ShippingFormInputs = z.infer<typeof shippingFormSchema>;
 
-export const paymentFormSchema = z.object({
-  cardHolder: z.string().min(1, 'Card holder name is required!'),
-  cardNumber: z
-    .string()
-    .min(1, 'Card number is required!')
-    .regex(/^\d{16}$/, 'Card number must be exactly 16 digits!'),
-  expirationDate: z
-    .string()
-    .min(1, 'Expiration date is required!')
-    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Expiration date must be in MM/YY format!'),
-  cvv: z
-    .string()
-    .min(1, 'CVV is required!')
-    .regex(/^\d{3}$/, 'CVV must be exactly 3 digits!'),
-});
-
-export type PaymentFormInputs = z.infer<typeof paymentFormSchema>;
-
 export type CartStoreStateType = {
   cart: CartItemsType;
   hasHydrated: boolean;
@@ -60,5 +42,7 @@ export type CartStoreStateType = {
 export type CartStoreActionsType = {
   addToCart: (product: CartItemType) => void;
   removeFromCart: (product: CartItemType) => void;
+  updateQuantity: (id: string | number, size: string, color: string, quantity: number) => void;
+  updateVariant: (item: CartItemType, newSize: string, newColor: string) => void; // 👈 Added for size/color switching
   clearCart: () => void;
 };

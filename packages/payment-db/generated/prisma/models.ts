@@ -8,6 +8,6 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Order'
-export type * from './models/UserAddress'
+export type * from './models/PaymentTransaction'
+export type * from './models/WebhookLog'
 export type * from './commonInputTypes'

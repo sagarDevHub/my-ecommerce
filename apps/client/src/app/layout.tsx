@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { ToastContainer } from 'react-toastify';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,6 +31,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
+        <head>
+          {/* Load Razorpay Checkout Script once globally */}
+          <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors`}
         >

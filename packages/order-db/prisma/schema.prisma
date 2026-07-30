@@ -19,6 +19,21 @@ model Order {
     updatedAt DateTime @updatedAt
 }
 
+model UserAddress {
+    id        String  @id @default(ulid())
+    userId    String
+    name      String
+    email     String
+    phone     String
+    address   String
+    city      String
+    isDefault Boolean @default(false)
+
+    createdAt DateTime @default(now())
+
+    @@index([userId])
+}
+
 enum OrderStatus {
     pending
     success
