@@ -171,6 +171,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.4.0
         version: 5.4.0(react-hook-form@7.82.0(react@19.1.0))
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       lucide-react:
         specifier: ^1.26.0
         version: 1.26.0(react@19.1.0)
@@ -462,7 +465,17 @@ importers:
         version: 7.9.0(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)
 
   packages/types:
+    dependencies:
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
+      '@repo/order-db':
+        specifier: workspace:*
+        version: link:../order-db
+      '@repo/product-db':
+        specifier: workspace:*
+        version: link:../product-db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config

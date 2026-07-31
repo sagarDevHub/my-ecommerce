@@ -1,7 +1,7 @@
 'use client';
 
 import useCartStore from '@/stores/cartStore';
-import { ProductType } from '@/types';
+import { ProductType } from '@repo/types';
 import { Minus, Plus, ShoppingBag } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
@@ -46,17 +46,13 @@ const ProductInteraction = ({
     toast.success('Product added to cart');
   };
 
-  // ⚡ DIRECT CHECKOUT ("Buy Now") HANDLER
   const handleBuyNow = () => {
-    // 1. Add item with selected options to store
     addToCart({
       ...product,
       quantity,
       selectedSize,
       selectedColor,
     });
-
-    // 2. Direct user straight to Shipping Address step
     router.push('/cart?step=2');
   };
 
@@ -121,7 +117,7 @@ const ProductInteraction = ({
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="text-gray-900 dark:text-gray-100 font-semibold px-2 min-w-5 text-center">
+          <span className="text-gray-900 dark:text-gray-100 font-semibold px-2 min-w-[20px] text-center">
             {quantity}
           </span>
           <button

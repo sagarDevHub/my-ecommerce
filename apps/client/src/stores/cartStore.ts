@@ -1,4 +1,4 @@
-import { CartItemType, CartStoreActionsType, CartStoreStateType } from '@/types';
+import { CartItemType, CartStoreActionsType, CartStoreStateType } from '@repo/types';
 import { create } from 'zustand';
 
 type CartStore = CartStoreStateType & CartStoreActionsType;

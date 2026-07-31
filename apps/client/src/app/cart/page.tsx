@@ -87,115 +87,121 @@ const CartPage = () => {
                 Your cart is currently empty.
               </p>
             ) : (
-              cart.map((item: CartItemType) => (
-                <div
-                  className="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-800 pb-6 last:border-none last:pb-0"
-                  key={item.id + item.selectedSize + item.selectedColor}
-                >
-                  <div className="flex gap-6 items-center">
-                    <div className="relative w-28 h-28 bg-gray-50 dark:bg-gray-800/80 rounded-lg overflow-hidden shrink-0 border border-gray-200/50 dark:border-gray-700/50">
-                      <Image
-                        src={
-                          item.images?.[item.selectedColor] ||
-                          item.images?.[Object.keys(item.images || {})[0] || ''] ||
-                          ''
-                        }
-                        alt={item.name}
-                        fill
-                        sizes="120px"
-                        className="object-contain p-2"
-                      />
-                    </div>
+              cart.map((item: CartItemType) => {
+                const imagesObj = item.images as Record<string, string> | undefined;
+                const imageSrc =
+                  imagesObj?.[item.selectedColor] ||
+                  (imagesObj ? Object.values(imagesObj)[0] : '') ||
+                  '';
 
-                    <div className="flex flex-col gap-2">
-                      <p className="text-sm font-semibold">{item.name}</p>
-
-                      {/* SIZE & COLOR DROPDOWNS */}
-                      <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                        <div className="flex items-center gap-1">
-                          <label className="text-[11px] text-gray-400">Size:</label>
-                          <select
-                            value={item.selectedSize}
-                            onChange={e => updateVariant(item, e.target.value, item.selectedColor)}
-                            className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-1.5 py-0.5 text-xs font-medium cursor-pointer text-gray-900 dark:text-gray-200 outline-none"
-                          >
-                            {(item.sizes || availableSizes).map((sz: string) => (
-                              <option key={sz} value={sz}>
-                                {sz.toUpperCase()}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="flex items-center gap-1">
-                          <label className="text-[11px] text-gray-400">Color:</label>
-                          <select
-                            value={item.selectedColor}
-                            onChange={e => updateVariant(item, item.selectedSize, e.target.value)}
-                            className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-1.5 py-0.5 text-xs font-medium cursor-pointer text-gray-900 dark:text-gray-200 outline-none capitalize"
-                          >
-                            {(item.colors || availableColors).map((clr: string) => (
-                              <option key={clr} value={clr}>
-                                {clr}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
-
-                      {/* QUANTITY BUTTONS */}
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-gray-400">Qty:</span>
-                        <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-md overflow-hidden bg-gray-50 dark:bg-gray-800">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                item.selectedSize,
-                                item.selectedColor,
-                                item.quantity - 1
-                              )
-                            }
-                            className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 cursor-pointer transition-colors"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="text-xs font-semibold px-2 py-0.5 min-w-5.5 text-center">
-                            {item.quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                item.selectedSize,
-                                item.selectedColor,
-                                item.quantity + 1
-                              )
-                            }
-                            className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 cursor-pointer transition-colors"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-
-                      <p className="text-sm font-semibold mt-0.5">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => removeFromCart(item)}
-                    className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-950/40 hover:bg-red-200 dark:hover:bg-red-900/60 transition-all text-red-500 flex items-center justify-center cursor-pointer shrink-0"
+                return (
+                  <div
+                    className="flex items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-800 pb-6 last:border-none last:pb-0"
+                    key={item.id + item.selectedSize + item.selectedColor}
                   >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              ))
+                    <div className="flex gap-6 items-center">
+                      <div className="relative w-28 h-28 bg-gray-50 dark:bg-gray-800/80 rounded-lg overflow-hidden shrink-0 border border-gray-200/50 dark:border-gray-700/50">
+                        <Image
+                          src={imageSrc}
+                          alt={item.name}
+                          fill
+                          sizes="120px"
+                          className="object-cover"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <p className="text-sm font-semibold">{item.name}</p>
+
+                        {/* SIZE & COLOR DROPDOWNS */}
+                        <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+                          <div className="flex items-center gap-1">
+                            <label className="text-[11px] text-gray-400">Size:</label>
+                            <select
+                              value={item.selectedSize}
+                              onChange={e =>
+                                updateVariant(item, e.target.value, item.selectedColor)
+                              }
+                              className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-1.5 py-0.5 text-xs font-medium cursor-pointer text-gray-900 dark:text-gray-200 outline-none"
+                            >
+                              {(item.sizes || availableSizes).map((sz: string) => (
+                                <option key={sz} value={sz}>
+                                  {sz.toUpperCase()}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="flex items-center gap-1">
+                            <label className="text-[11px] text-gray-400">Color:</label>
+                            <select
+                              value={item.selectedColor}
+                              onChange={e => updateVariant(item, item.selectedSize, e.target.value)}
+                              className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-1.5 py-0.5 text-xs font-medium cursor-pointer text-gray-900 dark:text-gray-200 outline-none capitalize"
+                            >
+                              {(item.colors || availableColors).map((clr: string) => (
+                                <option key={clr} value={clr}>
+                                  {clr}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* QUANTITY BUTTONS */}
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-xs text-gray-400">Qty:</span>
+                          <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-md overflow-hidden bg-gray-50 dark:bg-gray-800">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateQuantity(
+                                  item.id,
+                                  item.selectedSize,
+                                  item.selectedColor,
+                                  item.quantity - 1
+                                )
+                              }
+                              className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 cursor-pointer transition-colors"
+                            >
+                              <Minus className="w-3 h-3" />
+                            </button>
+                            <span className="text-xs font-semibold px-2 py-0.5 min-w-5.5 text-center">
+                              {item.quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateQuantity(
+                                  item.id,
+                                  item.selectedSize,
+                                  item.selectedColor,
+                                  item.quantity + 1
+                                )
+                              }
+                              className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 cursor-pointer transition-colors"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <p className="text-sm font-semibold mt-0.5">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => removeFromCart(item)}
+                      className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-950/40 hover:bg-red-200 dark:hover:bg-red-900/60 transition-all text-red-500 flex items-center justify-center cursor-pointer shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                );
+              })
             )
           ) : activeStep === 2 ? (
             <ShippingForm setShippingForm={setShippingForm} />

@@ -1,17 +1,12 @@
 'use client';
 
-import { ShippingFormInputs, shippingFormSchema } from '@/types';
+import { Address, ShippingFormInputs, shippingFormSchema } from '@repo/types';
 import { useAuth } from '@clerk/nextjs';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-interface Address extends ShippingFormInputs {
-  id: string;
-  isDefault?: boolean;
-}
 
 const ShippingForm = ({
   setShippingForm,
@@ -55,7 +50,6 @@ const ShippingForm = ({
 
         if (data && data.length > 0) {
           const lastUsed = data[0];
-          // 🛡️ Safe check fixes the 'possibly undefined' error
           if (lastUsed) {
             setSelectedAddressId(lastUsed.id);
             applyAddressToForm(lastUsed);
