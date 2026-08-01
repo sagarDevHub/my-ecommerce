@@ -259,7 +259,7 @@ const AddProduct = () => {
                                     className="w-2 h-2 rounded-full"
                                     style={{ backgroundColor: color }}
                                   />
-                                  <span className="text-sm min-w-[60px]">{color}</span>
+                                  <span className="text-sm min-w-15">{color}</span>
                                   <input
                                     type="file"
                                     accept="image/*"

@@ -117,7 +117,7 @@ const ProductInteraction = ({
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="text-gray-900 dark:text-gray-100 font-semibold px-2 min-w-[20px] text-center">
+          <span className="text-gray-900 dark:text-gray-100 font-semibold px-2 min-w-5 text-center">
             {quantity}
           </span>
           <button

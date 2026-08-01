@@ -3,6 +3,7 @@ import { clerkPlugin } from '@clerk/fastify';
 import Fastify from 'fastify';
 import { shouldBeUser } from './middleware/authMiddleware.js';
 import { orderRoute } from './routes/order.route.js';
+import { initOrderKafkaListners } from './kafka/orderConsumer.js';
 
 const fastify = Fastify({ logger: true });
 
@@ -32,6 +33,7 @@ const start = async () => {
     await fastify.register(orderRoute);
 
     await fastify.listen({ port: 8001 });
+    await initOrderKafkaListners();
     console.log(`Order service is running on (PORT: 8001)`);
   } catch (error) {
     fastify.log.error(error);

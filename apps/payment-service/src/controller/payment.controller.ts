@@ -1,5 +1,6 @@
 import { Context } from 'hono';
 import { razorpay } from '../lib/razorpay';
+import { sendKafkaEvent } from '@repo/kafka';
 
 export const createRazorpayOrderHandler = async (c: Context) => {
   try {
@@ -30,10 +31,21 @@ export const handleRazorpayWebhookHandler = async (c: Context) => {
     console.log('[Razorpay Webhook Event Received]:', body.event);
     if (body.event === 'payment.captured') {
       const paymentIntent = body.payload.payment.entity;
+
+      const orderId =
+        paymentIntent.notes?.orderId || paymentIntent.receipt?.replace('order_rcpt_', '');
       console.log('Payment Success for Order ID:', paymentIntent.order_id);
 
-      // TODO: Update order status to PAID in order-db or trigger QStash event!
+      await sendKafkaEvent('payment-events', 'ORDER_PAYMENT_SUCCESS', {
+        orderId,
+        razorpayPyamentId: paymentIntent.id,
+        razorpayOrderId: paymentIntent.order_id,
+        amount: paymentIntent.amount / 100,
+        email: paymentIntent.email,
+      });
     }
+
+    return c.json({ status: 'ok' }, 200);
   } catch (err: any) {
     console.error('[Webhook Error]:', err);
     return c.json({ error: 'Webhook processing failed' }, 500);
